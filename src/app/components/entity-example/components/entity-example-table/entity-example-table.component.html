@@ -1,0 +1,26 @@
+<div class="spinner-container" *ngIf="dataSource.loading$ | async">
+  <mat-spinner></mat-spinner>
+</div>
+
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8 entity-example-table">
+  <!-- ID Column -->
+  <ng-container matColumnDef="id-entity">
+    <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+    <mat-cell *matCellDef="let entity"> {{entity.id}} </mat-cell >
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+    <mat-cell  mat-cell *matCellDef="let entity"> {{entity.name}} </mat-cell >
+  </ng-container>
+
+  <!-- categoryName Column -->
+  <ng-container matColumnDef="categoryName">
+    <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+    <mat-cell *matCellDef="let entity"> {{entity.categoryName}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

@@ -48,7 +48,7 @@ export class LoginCardComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
-        this.router.navigate([`home/profile`]);
+        this.router.navigate([`entity-example/table`]);
       },
       error: err => {
         console.error('ERR: ', err);
