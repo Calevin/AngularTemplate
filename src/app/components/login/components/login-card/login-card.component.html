@@ -1,0 +1,26 @@
+<mat-card class="login-card">
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content class="border-top-input">
+        <form *ngIf="!isLoggedIn" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <mat-card-content>
+                <mat-form-field class="full-width-input">
+                    <input formControlName="username" matInput placeholder="Usuario" required >                   
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-content>
+                <mat-form-field class="full-width-input">
+                    <input formControlName="password" matInput type="password" placeholder="Password" required>                   
+                </mat-form-field>
+            </mat-card-content>
+            <button mat-raised-button color="primary">Login</button>
+        </form>
+    </mat-card-content>
+    <mat-card-content *ngIf="isLoginFailed" class="border-top-input">
+        <p>Login failed: {{ errorMessage }}</p>
+    </mat-card-content>
+    <mat-card-content *ngIf="isLoggedIn" class="border-top-input">
+        <p>Logged in as {{ roles }}.</p>
+        <button mat-stroked-button (click)="signOut()" color="warn">Logout</button>
+    </mat-card-content>
+</mat-card>
+
