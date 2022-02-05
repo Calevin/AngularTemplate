@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  API_URL: "https://spring-boot-gcp-template.rj.r.appspot.com"
 };
