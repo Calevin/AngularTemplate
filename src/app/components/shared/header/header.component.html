@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">    
+        <aside class="aside-l" *ngIf="isLoggedIn">
+            <button mat-button [routerLink]="'/home/profile'">
+                <mat-icon>home</mat-icon>
+            </button>
+        </aside>
+        <aside class="aside-r" *ngIf="isLoggedIn">
+            <div style="float: right;">
+                <button mat-raised-button [routerLink]="'/home/profile'">
+                    {{userName}}
+                    <mat-icon aria-hidden="false">account_box</mat-icon>
+                </button>                
+                <button mat-raised-button (click)="signOut()" color="warn">
+                    Logout
+                    <mat-icon aria-hidden="false">exit_to_app</mat-icon>
+                </button>
+            </div>
+        </aside>
+</mat-toolbar>

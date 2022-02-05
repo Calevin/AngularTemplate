@@ -1,0 +1,13 @@
+.aside-l {
+    float: left;
+    margin: 10px;
+    width: 75%;
+    border-top:solid 5px rgb(42, 180, 76);
+}
+
+.aside-r {
+    float: right;
+    margin: 10px;
+    width: 25%;
+    border-top:solid 5px #555;
+}
