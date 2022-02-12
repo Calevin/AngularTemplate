@@ -19,14 +19,21 @@ const getAllentityExample = JSON.stringify([
 ]);
 
 const server = http.createServer(async (req, res) => {
+console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 console.log("Request on server received :  " + req.method + " : " + req.url);
 
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Request-Method', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', '*');
 
-    if (req.url === "/" && req.method === "GET") {
+    if (req.method === 'OPTIONS') {
+        console.log('>>>>>>>>>>>>> OPTIONS');
+
+        res.writeHead(200);
+        res.end();
+        console.log('<<<<<<<<<<<<< OPTIONS');
+    } else if (req.url === "/" && req.method === "GET") {
         // set the status code, and content-type
         res.writeHead(200, { "Content-Type": "application/json" });
         // send the response data as text
@@ -66,11 +73,12 @@ console.log("Request on server received :  " + req.method + " : " + req.url);
           JSON.stringify({ message: `Route: ` + req.url + ` is not implemented` })
         );
     }
+console.log("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");    
 });
 
 function validateRequest(req, url, method) {
     return ((req.url === url || req.url === url + `/` ) 
-                 && (req.method === method || req.method === "OPTIONS"))
+                 && (req.method === method));
 }
 
 server.listen(PORT, () => {
