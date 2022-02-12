@@ -1,0 +1,39 @@
+<mat-card class="mat-elevation-z8">
+  <mat-card-content>
+      <form [formGroup]="entityForm" (ngSubmit)="onSubmit()">
+        <table>
+          <tr>
+            <td class="content-center">
+            <mat-form-field class="form-field">
+              <input formControlName="name" matTooltip="Enter Name" matInput placeholder="Name..." autocomplete="off">
+              <mat-error>
+                {{getErrorMessage()}}
+              </mat-error>
+            </mat-form-field>
+            </td>
+            <td class="content-center">
+              <mat-form-field class="form-field">
+                <input formControlName="description" matTooltip="Enter Description" matInput placeholder="Description..." autocomplete="off">
+                <mat-error>
+                  {{getErrorMessage()}}
+                </mat-error>
+              </mat-form-field>
+            </td>
+            <td class="content-center">
+              <mat-form-field class="form-field">
+                <input formControlName="categoryId" matTooltip="Enter Category Id" matInput placeholder="0" autocomplete="off">
+                <mat-error>
+                  {{getErrorMessage()}}
+                </mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+              <td class="content-center">
+                <button mat-raised-button color="primary">Guardar</button>
+              </td>
+          </tr>
+        </table>
+      </form>
+  </mat-card-content>
+</mat-card>

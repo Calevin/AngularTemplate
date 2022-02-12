@@ -6,6 +6,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,13 +16,22 @@ import { MatButtonModule } from '@angular/material/button';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,    
     MatToolbarModule,
     MatIconModule,
     RouterModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule,
+    FormsModule,
+    ReactiveFormsModule,
   ], exports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    FormsModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

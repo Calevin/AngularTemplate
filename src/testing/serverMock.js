@@ -3,7 +3,7 @@
 const http = require("http");
 
 const HOST = "localhost";
-const PORT = 8020;
+const PORT = 8080;
 
 const getAllentityExample = JSON.stringify([
     {
@@ -15,6 +15,19 @@ const getAllentityExample = JSON.stringify([
         id: 2,
         name: "Club Atlético River Plate",
         categoryName: "Primera División de Argentina"
+    }
+]);
+
+const newRecord201Created = JSON.stringify([
+    {
+        id: 8,
+        name: "test",
+        description: "descripcion test",
+        category: {
+            id: 1,
+            name: null,
+            description: null
+        }
     }
 ]);
 
@@ -66,6 +79,11 @@ console.log("Request on server received :  " + req.method + " : " + req.url);
         res.setHeader('Content-Type', 'application/json');
         res.end(getAllentityExample);
     }
+
+    else if (validateRequest(req, "/entityExample", "POST")) {
+        res.setHeader('Content-Type', 'application/json');
+        res.end(newRecord201Created);
+    }    
 
     else {
         res.writeHead(404, { "Content-Type": "application/json" });

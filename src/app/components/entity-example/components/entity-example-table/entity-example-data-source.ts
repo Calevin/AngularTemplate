@@ -30,7 +30,6 @@ export class EntityExampleDataSource implements DataSource<EntityExample> {
         )
         .subscribe({
             next: data => {
-              console.log(JSON.stringify(data));
               this.entityExampleSubject.next(data);
             },
             error: err => {

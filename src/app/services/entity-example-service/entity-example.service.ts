@@ -11,13 +11,18 @@ const API_URL : string = environment.API_URL;
 })
 export class EntityExampleService {
 
+  endpoint = `${API_URL}/entityExample`;
+
   constructor(private _http: HttpClient) { }
 
   getAll(): Observable<EntityExample[]> {
-    const endpoint = `${API_URL}/entityExample`;
-
+    
     return this
               ._http
-              .get<EntityExample[]>(endpoint);
+              .get<EntityExample[]>(this.endpoint);
   }
+
+  new(elemento: EntityExample): Observable<EntityExample>{
+    return this._http.post<EntityExample>(this.endpoint, elemento);
+  }    
 }

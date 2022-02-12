@@ -27,7 +27,6 @@ export class ProfileCardComponent implements OnInit {
       .me()
       .subscribe({
         next: data => {
-          console.log(data);
           this.user.username = data.username;
         },
         error: err => {
