@@ -2,12 +2,16 @@
     float: left;
     margin: 10px;
     width: 75%;
-    border-top:solid 5px rgb(42, 180, 76);
+    border-top:solid 5px rgb(255, 255, 255);
 }
 
 .aside-r {
     float: right;
     margin: 10px;
     width: 25%;
-    border-top:solid 5px #555;
+    border-top:solid 5px rgb(0, 0, 0);
+}
+
+button {
+    margin: 5px;
 }
