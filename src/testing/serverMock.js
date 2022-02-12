@@ -5,7 +5,7 @@ const http = require("http");
 const HOST = "localhost";
 const PORT = 8080;
 
-const getAllentityExample = JSON.stringify([
+listEntityExample = [
     {
         id: 1,
         name: "Club Atlético Boca Juniors",
@@ -16,20 +16,7 @@ const getAllentityExample = JSON.stringify([
         name: "Club Atlético River Plate",
         categoryName: "Primera División de Argentina"
     }
-]);
-
-const newRecord201Created = JSON.stringify([
-    {
-        id: 8,
-        name: "test",
-        description: "descripcion test",
-        category: {
-            id: 1,
-            name: null,
-            description: null
-        }
-    }
-]);
+];
 
 const server = http.createServer(async (req, res) => {
 console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
@@ -62,7 +49,7 @@ console.log("Request on server received :  " + req.method + " : " + req.url);
         res.end(JSON.stringify(healthcheck));
     }
 
-    else if (validateRequest(req, "/auth/login", "POST")) {
+    else if (validateRequestUrlEstricta(req, "/auth/login", "POST")) {
         const loginOk = {
             "username": "admin",
             "roles": [
@@ -75,14 +62,39 @@ console.log("Request on server received :  " + req.method + " : " + req.url);
         res.end(JSON.stringify(loginOk));
     }
 
-    else if (validateRequest(req, "/entityExample", "GET")) {
+    else if (validateRequestUrlEstricta(req, "/entityExample", "GET")) {
         res.setHeader('Content-Type', 'application/json');
-        res.end(getAllentityExample);
+        res.end(JSON.stringify(listEntityExample));
     }
 
-    else if (validateRequest(req, "/entityExample", "POST")) {
+    else if (validateRequestUrlEstricta(req, "/entityExample", "POST")) {
+
         res.setHeader('Content-Type', 'application/json');
-        res.end(newRecord201Created);
+
+        let data = '';
+
+        req.on('data', chunk => {
+            data += chunk;
+        });
+
+        req.on('end', () => {
+
+            console.log(JSON.parse(data));
+
+            const newId = listEntityExample.length+1;
+
+            const newEntityExample = Object.assign({ id: newId }, JSON.parse(data));
+    
+            console.log("newProduct: ", newEntityExample);
+    
+            listEntityExample.push(newEntityExample);
+
+            const { id, name, description } = newEntityExample;
+
+            res.write(JSON.stringify({ id, name, description }));
+
+            res.end();
+        });
     }    
 
     else {
@@ -94,9 +106,18 @@ console.log("Request on server received :  " + req.method + " : " + req.url);
 console.log("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");    
 });
 
-function validateRequest(req, url, method) {
-    return ((req.url === url || req.url === url + `/` ) 
-                 && (req.method === method));
+function validateRequestUrlEstricta(req, url, method) {    
+    return (req.url === url) && (req.method === method);
+}
+
+function validateRequestUrlConParametro(req, url, method) {    
+    console.log("substring: ", req.url.substring(0, url.length));
+
+    return((req.url.substring(0,10) === url) && (req.method === method));
+}
+
+function getParametroUrl(req, url){
+    return req.url.substring(url.length, req.url.length);
 }
 
 server.listen(PORT, () => {
