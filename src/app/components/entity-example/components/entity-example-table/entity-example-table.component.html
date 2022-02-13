@@ -1,3 +1,6 @@
+<br>
+<app-entity-example-form (loadEntitys)="loadEntitys()"></app-entity-example-form>
+<br>
 <div class="spinner-container" *ngIf="dataSource.loading$ | async">
   <mat-spinner></mat-spinner>
 </div>
@@ -24,5 +27,3 @@
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
-
-<app-entity-example-form (loadEntitys)="loadEntitys()"></app-entity-example-form>
