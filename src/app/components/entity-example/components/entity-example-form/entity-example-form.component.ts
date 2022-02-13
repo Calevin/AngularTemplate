@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { EntityExampleService } from '../../../../services/entity-example-service/entity-example.service';
 import { EntityExample } from '../../../../services/entity-example-service/models/entity-example';
@@ -14,6 +14,8 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class EntityExampleFormComponent implements OnInit {
   
+  @Output("loadEntitys") loadEntitys: EventEmitter<any> = new EventEmitter();
+
   entityForm = this.formBulider.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
     description: ['', [Validators.required, Validators.minLength(2)]],
@@ -53,7 +55,7 @@ export class EntityExampleFormComponent implements OnInit {
           duration: 3000
         });
 
-        this.router.navigate(['/entity-example/table']);
+        this.loadEntitys.emit();
       });;
 
     } else {

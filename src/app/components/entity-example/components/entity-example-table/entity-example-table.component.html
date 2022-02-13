@@ -25,4 +25,4 @@
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
 
-<app-entity-example-form></app-entity-example-form>
+<app-entity-example-form (loadEntitys)="loadEntitys()"></app-entity-example-form>

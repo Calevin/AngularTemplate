@@ -23,8 +23,10 @@ export class EntityExampleTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSource = new EntityExampleDataSource(this._entityService);
-    this.dataSource.loadEntitys();
-
+    this.loadEntitys();
   }
 
+  public loadEntitys() {
+    this.dataSource.loadEntitys();    
+  }
 }
