@@ -56,6 +56,7 @@ export class EntityExampleFormComponent implements OnInit {
         });
 
         this.loadEntitys.emit();
+        this.resetForm();
       });;
 
     } else {
@@ -72,5 +73,9 @@ export class EntityExampleFormComponent implements OnInit {
     }
 
     return this.entityForm.hasError('name') ? 'Not a valid name' : '';
+  }
+
+  resetForm() {
+    this.entityForm.reset();
   }  
 }
