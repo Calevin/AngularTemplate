@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { EntityExampleService } from '../../../../services/entity-example-service/entity-example.service';
 import { EntityExampleDataSource } from './entity-example-data-source';
+import { EMPTY } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 export interface PeriodicElement {
   name: string;
@@ -16,10 +19,11 @@ export interface PeriodicElement {
 })
 export class EntityExampleTableComponent implements OnInit {
 
-  displayedColumns: string[] = ['id-entity', 'name', 'categoryName'];
+  displayedColumns: string[] = ['id-entity', 'name', 'categoryName', 'Delete'];
   dataSource!: EntityExampleDataSource;
   
-  constructor(private _entityService: EntityExampleService) { }
+  constructor(private _entityService: EntityExampleService
+            , private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.dataSource = new EntityExampleDataSource(this._entityService);
@@ -28,5 +32,26 @@ export class EntityExampleTableComponent implements OnInit {
 
   public loadEntitys() {
     this.dataSource.loadEntitys();    
+  }
+
+  deleteEntity(id: number){
+    console.log('BORRAR: ' + id);
+    this._entityService.delete(id)
+    .pipe(catchError( error => {
+
+      this.snackBar.open('No se pudo borrar la entidad', '', {
+        duration: 3000
+      });
+
+      return EMPTY;
+    }))      
+    .subscribe(() => {
+
+      this.snackBar.open('Entidad borrada ok', 'Cerrar', {
+        duration: 3000
+      });
+
+      this.loadEntitys();
+    });
   }
 }

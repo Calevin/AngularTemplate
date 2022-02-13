@@ -24,5 +24,9 @@ export class EntityExampleService {
 
   new(elemento: EntityExample): Observable<EntityExample>{
     return this._http.post<EntityExample>(this.endpoint, elemento);
-  }    
+  }
+  
+  delete(id: number): Observable<EntityExample>{
+    return this._http.delete<EntityExample>(`${this.endpoint}/${id}`);
+  }
 }

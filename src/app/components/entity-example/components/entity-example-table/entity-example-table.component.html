@@ -20,9 +20,14 @@
 
   <!-- categoryName Column -->
   <ng-container matColumnDef="categoryName">
-    <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
     <mat-cell *matCellDef="let entity"> {{entity.categoryName}} </mat-cell>
   </ng-container>
+
+  <ng-container matColumnDef="Delete">
+    <mat-header-cell  *matHeaderCellDef mat-sort-header> Delete </mat-header-cell>
+    <mat-cell  *matCellDef="let entity"> <button mat-icon-button aria-label="Example icon button with a delete icon" type="button" mat-raised-button color="accent" matTooltip="Delete" (click)="deleteEntity(entity.id)"><mat-icon>delete_forever</mat-icon></button></mat-cell>
+  </ng-container>  
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

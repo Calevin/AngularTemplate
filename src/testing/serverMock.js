@@ -97,6 +97,18 @@ console.log("Request on server received :  " + req.method + " : " + req.url);
         });
     }    
 
+    else if (validateRequestUrlConParametro(req, "/entityExample/", "DELETE")) {
+        console.log("getParametroUrl: ", getParametroUrl(req, "/entityExample/"));
+
+        let seleccionado=listEntityExample.filter((p)=>{
+            return p.id==getParametroUrl(req, "/entityExample/");
+        })[0];
+
+        listEntityExample.splice(listEntityExample.indexOf(seleccionado), 1);
+
+        res.end();
+    }
+
     else {
         res.writeHead(404, { "Content-Type": "application/json" });
         res.end(
@@ -113,7 +125,7 @@ function validateRequestUrlEstricta(req, url, method) {
 function validateRequestUrlConParametro(req, url, method) {    
     console.log("substring: ", req.url.substring(0, url.length));
 
-    return((req.url.substring(0,10) === url) && (req.method === method));
+    return((req.url.substring(0,url.length) === url) && (req.method === method));
 }
 
 function getParametroUrl(req, url){

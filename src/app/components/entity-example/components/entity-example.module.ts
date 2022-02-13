@@ -11,7 +11,7 @@ import { MatProgressSpinnerModule  } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from "@angular/material/input";
-import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
 
 import { SharedModule } from '../../shared/shared.module';
 
@@ -29,6 +29,7 @@ import { SharedModule } from '../../shared/shared.module';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule,
     SharedModule
   ]
 })
